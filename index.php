@@ -1,3 +1,3 @@
 <?php
-header('Location: /annual_income.html');
+header('Location: annual_income.html');
 ?>
