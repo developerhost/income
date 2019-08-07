@@ -1,7 +1,8 @@
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
+const reducer = (accumulator, currentValue) => accumulator + currentValue;//全て足すとかできる
+const tweetDivided = document.getElementById("tweet-area");
 
 function assessment(){
-    var a=document.getElementById("income").value;
+    var a=document.getElementById("income").value;　//これが実際に入力された年収
     var nensyu=[50,50,50,50,50,50,50,150,150,150,150,150,150,150,150,150,150,150,150,150,250,250,250,250,250,250,250,250,250,250,250,250,250,250,350,350,350,350,350,350,350,350,350,350,350,350,350,450,450,450,450,450,450,450,450,450,450,550,550,550,550,550,550,550,550,550,650,650,650,650,650,650,650,750,750,750,750,750,750,850,850,850,850,850,950,950,950,950,1050,1050,1050,1150,1150,1250,1250,1350,1450,1550,1700,1900,2250,parseInt(a)]
     var goukei=nensyu.reduce(reducer); ///配列全部たす
     var heikin=parseInt(goukei)/ parseInt(nensyu.length); ///平均を求める
@@ -53,6 +54,31 @@ function assessment(){
         document.getElementById("comment-area").innerHTML="超かねも";
     }else{
         document.getElementById("result-area").style.color=("#ff9900");
-        document.getElementById("comment-area").innerHTML="デヴィ夫人";
+        document.getElementById("comment-area").innerHTML="世界を統べるもの";
     }
-}
+
+
+    // TODO ツイートエリアの作成
+    const anchor = document.createElement('a');//aという要素を作成
+    const hrefValue = "https://twitter.com/intent/tweet?button_hashtag=あなたの年収偏差値は&ref_src=twsrc%5Etfw";//var
+        + encodeURIComponent("あなたの年収偏差値");
+        + "&ref_src=twsrc%5Etfw";
+
+    anchor.setAttribute("href",hrefValue);//指定の要素に新しい属性を追加
+    anchor.className = "twitter-hashtag-button";//クラスを取得
+    anchor.setAttribute("data-text", "あなたの年収偏差値は"+syoukiri+"です");//診断結果を取得
+    anchor.innerText = "Tweet #あなたの年収偏差値";//テキスト
+    anchor.innerText = "Tweet https://my-sitekanon.herokuapp.com/";
+    tweetDivided.appendChild(anchor);
+
+    //TODO　ツイートエリアが２個できてしまう＆前の診断結果のツイートが残ってしまう
+
+    //widget.jsスクリプトを読み込み
+    const script = document.createElement("script")
+    script.setAttribute("src","https://platform.twitter.com/widgets.js");
+    tweetDivided.appendChild(script);
+
+    //TODO ツイートにこのサイトのURL貼る
+
+    
+};
